@@ -13,4 +13,6 @@ public interface TestingService {
     void printQuestion(Question question);
 
     int readTestAnswer ();
+
+    void startTest();
 }

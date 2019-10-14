@@ -86,4 +86,26 @@ public class TestingServiceImpl implements TestingService {
         }
         return answ;
     }
+
+    public void startTest() {
+        String userName = this.readUserName();
+        String userLastName = this.readUserLastName();
+        int correctAnsw = 0;
+
+        Question q = this.getNextQuestion();
+        int questionCount = 0;
+        while (q != null) {
+
+            this.printQuestion(q);
+
+            if (this.readTestAnswer() == q.getRightAnswer()) {
+                correctAnsw++;
+            }
+
+            q = this.getNextQuestion();
+            questionCount++;
+        }
+
+        System.out.println("Result: " + correctAnsw + " out " + questionCount);
+    }
 }
