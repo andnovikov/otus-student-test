@@ -20,7 +20,7 @@ public class QuestionDaoSimple implements QuestionDao{
 
         List<Question> lst = new ArrayList();
 
-        ClassLoader classLoader = new Question().getClass().getClassLoader();
+        ClassLoader classLoader = this.getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(questionFile);
 
         Scanner scanner = new Scanner(inputStream);
