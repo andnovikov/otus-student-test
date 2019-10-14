@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Main {
 
-    public static void Main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context.xml");
         QuestionService questionService = context.getBean(QuestionService.class);
 
@@ -27,10 +27,12 @@ public class Main {
         List<Question> questionList = questionService.getAllQuestions();
         for (Question q: questionList) {
             System.out.println(q.getText());
-            System.out.println("1:" + q.getAnswer1());
-            System.out.println("2:" + q.getAnswer2());
-            System.out.println("3:" + q.getAnswer3());
-            System.out.println("4:" + q.getAnswer4());
+
+            int i = 0;
+            while (i < q.getAnswers().size()) {
+                System.out.println(String.valueOf(i+1) + ":" + q.getAnswers().get(i));
+                i++;
+            }
 
             int answ = 0; boolean answInput = false;
             while (!answInput) {
