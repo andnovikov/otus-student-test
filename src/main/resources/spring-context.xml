@@ -11,5 +11,9 @@
   <bean id="questionService" class="ru.anovikov.learning.service.QuestionServiceImpl">
       <constructor-arg name="questionDao" ref="questionDao"/>
   </bean>
+
+  <bean id="testingService" class="ru.anovikov.learning.service.TestingServiceImpl">
+      <constructor-arg name="questionService" ref="questionService"/>
+  </bean>
   
 </beans>
