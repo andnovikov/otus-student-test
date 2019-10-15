@@ -1,34 +1,46 @@
 package ru.anovikov.learning.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Service;
 import ru.anovikov.learning.domain.Question;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Locale;
 
+@Service
 public class TestingServiceImpl implements TestingService {
 
     private BufferedReader reader;
-    private QuestionService questionService;
     private List<Question> testingQuestions;
+    private Locale locale;
     private int currentQiestionNumber;
 
-    public TestingServiceImpl(QuestionService questionService) {
-        this.reader = new BufferedReader(new InputStreamReader(System.in));
+    private QuestionService questionService;
+    private MessageSource messageSource;
+
+    @Autowired
+    public TestingServiceImpl(QuestionService questionService, MessageSource messageSource) {
         this.questionService = questionService;
+        this.messageSource = messageSource;
+
+        this.reader = new BufferedReader(new InputStreamReader(System.in));
         this.testingQuestions = this.questionService.getAllQuestions();
+        this.locale = Locale.getDefault();
         this.currentQiestionNumber = 0;
     }
 
     public String readUserName() {
         String name = "";
         try {
-            System.out.print("Enter your name: ");
+            System.out.print(messageSource.getMessage("read.name", new String[] {""}, locale) + ": ");
             name = reader.readLine();
         }
         catch (IOException e) {
-            System.out.println("Cannot read name");
+            System.out.print(messageSource.getMessage("error.read.name", new String[] {""}, locale) + ": " + e.getMessage());
         }
         return name;
     }
@@ -36,11 +48,11 @@ public class TestingServiceImpl implements TestingService {
     public String readUserLastName() {
         String lastname = "";
         try {
-            System.out.print("Enter your lastname: ");
+            System.out.print(messageSource.getMessage("read.lastname", new String[] {""}, locale) + ": ");
             lastname = reader.readLine();
         }
         catch (IOException e) {
-            System.out.println("Cannot read lastname");
+            System.out.print(messageSource.getMessage("error.read.lastname", new String[] {""}, locale) + ": " + e.getMessage());
         }
         return lastname;
     }
@@ -69,19 +81,19 @@ public class TestingServiceImpl implements TestingService {
         int answ = 0; boolean answInput = false;
         while (!answInput) {
             try {
-                System.out.print("Enter number of your answer: ");
+                System.out.print(messageSource.getMessage("read.answer", new String[] {""}, locale) + ": ");
                 answ = Integer.parseInt(reader.readLine());
 
                 if ((answ <= 0) || (answ > 4)) {
-                    System.out.println("Wrong number.");
+                    System.out.println(messageSource.getMessage("warning.read.answer", new String[] {""}, locale));
                 }
                 else { answInput = true; };
             }
             catch (NumberFormatException e) {
-                System.out.println("Wrong number.");
+                System.out.print(messageSource.getMessage("warning.read.answer", new String[] {""}, locale));
             }
             catch (IOException e) {
-                System.out.println("Cannot read answer.");
+                System.out.print(messageSource.getMessage("error.read.answer", new String[] {""}, locale) + ": " + e.getMessage());
             }
         }
         return answ;
@@ -106,6 +118,6 @@ public class TestingServiceImpl implements TestingService {
             questionCount++;
         }
 
-        System.out.println("Result: " + correctAnsw + " out " + questionCount);
+        System.out.print(String.format(messageSource.getMessage("write.result", new String[]{""}, locale), correctAnsw, questionCount));
     }
 }
