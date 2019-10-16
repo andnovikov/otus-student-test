@@ -14,13 +14,13 @@ import java.util.Locale;
 @Service
 public class TestingServiceImpl implements TestingService {
 
-    private BufferedReader reader;
+    private final BufferedReader reader;
     private List<Question> testingQuestions;
-    private Locale locale;
+    private final Locale locale;
     private int currentQiestionNumber;
 
-    private QuestionService questionService;
-    private MessageSource messageSource;
+    private final QuestionService questionService;
+    private final MessageSource messageSource;
 
     @Autowired
     public TestingServiceImpl(QuestionService questionService, MessageSource messageSource) {
