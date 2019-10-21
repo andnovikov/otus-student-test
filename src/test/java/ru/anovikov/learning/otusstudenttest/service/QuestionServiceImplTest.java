@@ -1,6 +1,4 @@
-package ru.anovikov.learning.service;
-
-import static org.junit.jupiter.api.Assertions.*;
+package ru.anovikov.learning.otusstudenttest.service;
 
 class QuestionServiceImplTest {
 

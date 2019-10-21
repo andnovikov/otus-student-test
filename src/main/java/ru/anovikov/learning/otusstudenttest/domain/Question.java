@@ -1,4 +1,4 @@
-package ru.anovikov.learning.domain;
+package ru.anovikov.learning.otusstudenttest.domain;
 
 import java.util.ArrayList;
 import java.util.List;

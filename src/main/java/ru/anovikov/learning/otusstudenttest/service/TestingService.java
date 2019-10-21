@@ -1,6 +1,6 @@
-package ru.anovikov.learning.service;
+package ru.anovikov.learning.otusstudenttest.service;
 
-import ru.anovikov.learning.domain.Question;
+import ru.anovikov.learning.otusstudenttest.domain.Question;
 
 public interface TestingService {
 
