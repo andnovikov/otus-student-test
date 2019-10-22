@@ -3,8 +3,7 @@ package ru.anovikov.learning;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.anovikov.learning.service.TestingService;
+import ru.anovikov.learning.otusstudenttest.service.TestingService;
 
 @Configuration
 @ComponentScan

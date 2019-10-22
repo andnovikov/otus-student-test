@@ -1,4 +1,4 @@
-package ru.anovikov.learning.config;
+package ru.anovikov.learning.otusstudenttest.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
