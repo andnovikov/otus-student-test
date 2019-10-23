@@ -17,10 +17,13 @@ public class OtusStudentTestApplication {
 		SpringApplication.run(OtusStudentTestApplication.class, args);
 	}
 
+	/*
 	@Bean
 	public CommandLineRunner test(TestingService testingService){
 		return(args) -> {
 			testingService.startTest();
 		};
 	}
+
+	 */
 }
