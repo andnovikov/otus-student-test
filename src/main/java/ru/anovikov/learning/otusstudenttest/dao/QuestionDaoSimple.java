@@ -11,11 +11,11 @@ import java.util.Scanner;
 
 import java.io.InputStream;
 
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application.yml")
 @Service
 public class QuestionDaoSimple implements QuestionDao{
 
-    @Value("${question.filepath}")
+    @Value("${application.questionfile}")
     private String questionFile;
 
     public List<Question> findAll() {

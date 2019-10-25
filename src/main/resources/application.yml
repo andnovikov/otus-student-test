@@ -1,0 +1,6 @@
+application:
+  questionfile: questions.csv
+
+spring:
+  messages:
+    basename: i18n.messages

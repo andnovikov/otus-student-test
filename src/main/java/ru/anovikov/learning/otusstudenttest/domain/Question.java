@@ -13,6 +13,11 @@ public class Question {
         answers = new ArrayList();
     }
 
+    public Question (String text) {
+        this.text = text;
+        answers = new ArrayList();
+    }
+
     public String getText() {
         return text;
     }
