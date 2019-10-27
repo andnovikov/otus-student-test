@@ -57,7 +57,6 @@ class TestingServiceTest {
 
     @Test
     void getNextQuestion() {
-
         List<Question> list = new ArrayList<>();
         Question q1 = new Question("question1");
         q1.addAnswer("1");

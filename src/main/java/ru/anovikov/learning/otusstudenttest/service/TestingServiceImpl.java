@@ -27,7 +27,6 @@ public class TestingServiceImpl implements TestingService {
         this.messageSource = messageSource;
         this.reader = bufferedReader;
 
-        this.testingQuestions = this.questionService.getAllQuestions();
         this.locale = Locale.getDefault();
         this.currentQiestionNumber = 0;
     }
@@ -57,6 +56,10 @@ public class TestingServiceImpl implements TestingService {
     }
 
     public Question getNextQuestion() {
+        if (testingQuestions == null) {
+            this.testingQuestions = this.questionService.getAllQuestions();
+        }
+
         if (currentQiestionNumber < testingQuestions.size()) {
             Question question = testingQuestions.get(currentQiestionNumber);
             currentQiestionNumber++;
