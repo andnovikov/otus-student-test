@@ -65,11 +65,8 @@ class TestingServiceTest {
         q1.addAnswer("4");
         q1.setRightAnswer(1);
         list.add(q1);
-
         when(questionService.getAllQuestions()).thenReturn(list);
-
         Question q = testingService.getNextQuestion();
-
         assertEquals(q1, q);
     }
 }
