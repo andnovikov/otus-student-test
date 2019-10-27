@@ -5,18 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.MessageSource;
-import ru.anovikov.learning.otusstudenttest.dao.QuestionDao;
 import ru.anovikov.learning.otusstudenttest.domain.Question;
 
-import java.awt.image.ImagingOpException;
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,29 +39,17 @@ class TestingServiceTest {
     }
 
     @Test
-    void readUserName() {
+    void readUserName() throws IOException {
         String example = "Boris";
-        try {
-            when(reader.readLine()).thenReturn(example);
-        }
-        catch (IOException e) {
-
-        }
-
+        when(reader.readLine()).thenReturn(example);
         String userLastname = testingService.readUserName();
         assertEquals(example, userLastname );
     }
 
     @Test
-    void readUserLastName() {
+    void readUserLastName() throws IOException {
         String example = "Britva";
-        try {
-            when(reader.readLine()).thenReturn(example);
-        }
-        catch (IOException e) {
-
-        }
-
+        when(reader.readLine()).thenReturn(example);
         String userLastname = testingService.readUserLastName();
         assertEquals(example, userLastname );
     }
@@ -91,11 +73,4 @@ class TestingServiceTest {
 
         assertEquals(q1, q);
     }
-
-    /*
-
-    @Test
-    void readTestAnswer() {
-    }
-    */
 }
