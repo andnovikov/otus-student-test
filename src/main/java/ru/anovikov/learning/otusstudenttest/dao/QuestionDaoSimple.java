@@ -1,10 +1,9 @@
-package ru.anovikov.learning.dao;
+package ru.anovikov.learning.otusstudenttest.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
-import ru.anovikov.learning.domain.Question;
+import ru.anovikov.learning.otusstudenttest.domain.Question;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -12,11 +11,11 @@ import java.util.Scanner;
 
 import java.io.InputStream;
 
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application.yml")
 @Service
 public class QuestionDaoSimple implements QuestionDao{
 
-    @Value("${question.filepath}")
+    @Value("${application.questionfile}")
     private String questionFile;
 
     public List<Question> findAll() {

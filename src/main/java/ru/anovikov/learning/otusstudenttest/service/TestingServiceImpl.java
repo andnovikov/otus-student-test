@@ -1,13 +1,12 @@
-package ru.anovikov.learning.service;
+package ru.anovikov.learning.otusstudenttest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
-import ru.anovikov.learning.domain.Question;
+import ru.anovikov.learning.otusstudenttest.domain.Question;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Locale;
 
@@ -23,12 +22,11 @@ public class TestingServiceImpl implements TestingService {
     private final MessageSource messageSource;
 
     @Autowired
-    public TestingServiceImpl(QuestionService questionService, MessageSource messageSource) {
+    public TestingServiceImpl(QuestionService questionService, MessageSource messageSource, BufferedReader bufferedReader) {
         this.questionService = questionService;
         this.messageSource = messageSource;
+        this.reader = bufferedReader;
 
-        this.reader = new BufferedReader(new InputStreamReader(System.in));
-        this.testingQuestions = this.questionService.getAllQuestions();
         this.locale = Locale.getDefault();
         this.currentQiestionNumber = 0;
     }
@@ -58,6 +56,10 @@ public class TestingServiceImpl implements TestingService {
     }
 
     public Question getNextQuestion() {
+        if (testingQuestions == null) {
+            this.testingQuestions = this.questionService.getAllQuestions();
+        }
+
         if (currentQiestionNumber < testingQuestions.size()) {
             Question question = testingQuestions.get(currentQiestionNumber);
             currentQiestionNumber++;
