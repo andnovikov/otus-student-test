@@ -11,8 +11,6 @@ import ru.anovikov.learning.otusstudenttest.service.TestingService;
 public class OtusStudentTestApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext context = SpringApplication.run(OtusStudentTestApplication.class, args);
-		TestingService testingService = context.getBean(TestingService.class);
-		testingService.startTest();
+		SpringApplication.run(OtusStudentTestApplication.class, args);
 	}
 }
