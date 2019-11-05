@@ -15,6 +15,4 @@ public interface TestingService {
     int startTest();
 
     void printResult();
-
-    int getResult();
 }
