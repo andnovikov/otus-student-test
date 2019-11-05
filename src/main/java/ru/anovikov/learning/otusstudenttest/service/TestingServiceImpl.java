@@ -16,7 +16,13 @@ public class TestingServiceImpl implements TestingService {
     private final BufferedReader reader;
     private List<Question> testingQuestions;
     private final Locale locale;
+
     private int currentQiestionNumber;
+    private int lastResult;
+    private boolean hasResult;
+
+    private String name;
+    private String lastname;
 
     private final QuestionService questionService;
     private final MessageSource messageSource;
@@ -26,33 +32,35 @@ public class TestingServiceImpl implements TestingService {
         this.questionService = questionService;
         this.messageSource = messageSource;
         this.reader = bufferedReader;
-
         this.locale = Locale.getDefault();
+
+        this.name = "";
+        this.lastname = "";
         this.currentQiestionNumber = 0;
+        this.lastResult = 0;
+        this.hasResult = false;
     }
 
     public String readUserName() {
-        String name = "";
         try {
             System.out.print(messageSource.getMessage("read.name", new String[] {""}, locale) + ": ");
-            name = reader.readLine();
+            this.name = reader.readLine();
         }
         catch (IOException e) {
             System.out.print(messageSource.getMessage("error.read.name", new String[] {""}, locale) + ": " + e.getMessage());
         }
-        return name;
-    }
 
-    public String readUserLastName() {
-        String lastname = "";
         try {
             System.out.print(messageSource.getMessage("read.lastname", new String[] {""}, locale) + ": ");
-            lastname = reader.readLine();
+            this.lastname = reader.readLine();
         }
         catch (IOException e) {
             System.out.print(messageSource.getMessage("error.read.lastname", new String[] {""}, locale) + ": " + e.getMessage());
         }
-        return lastname;
+
+        System.out.println(String.format(messageSource.getMessage("write.greetings", new String[]{""}, locale), this.name + " " + this.lastname));
+
+        return this.name + " " + this.lastname;
     }
 
     public Question getNextQuestion() {
@@ -101,25 +109,37 @@ public class TestingServiceImpl implements TestingService {
         return answ;
     }
 
-    public void startTest() {
-        String userName = this.readUserName();
-        String userLastName = this.readUserLastName();
+    public int startTest() {
+        if (this.name.equalsIgnoreCase("")) {
+            String userName = this.readUserName();
+        }
+        currentQiestionNumber = 0;
         int correctAnsw = 0;
 
         Question q = this.getNextQuestion();
         int questionCount = 0;
         while (q != null) {
-
             this.printQuestion(q);
-
-            if (this.readTestAnswer() == q.getRightAnswer()) {
-                correctAnsw++;
-            }
-
+            if (this.readTestAnswer() == q.getRightAnswer()) { correctAnsw++; }
             q = this.getNextQuestion();
             questionCount++;
         }
+        lastResult = correctAnsw;
+        hasResult = true;
 
-        System.out.print(String.format(messageSource.getMessage("write.result", new String[]{""}, locale), correctAnsw, questionCount));
+        return correctAnsw;
+    }
+
+    public void printResult() {
+        if (!hasResult) {
+            System.out.println(messageSource.getMessage("warning.write.result", new String[]{""}, locale));
+        }
+        else {
+            System.out.println(String.format(messageSource.getMessage("write.good.result", new String[]{""}, locale), name + " " + lastname, lastResult, testingQuestions.size()));
+        }
+    }
+
+    public int getResult() {
+        return lastResult;
     }
 }

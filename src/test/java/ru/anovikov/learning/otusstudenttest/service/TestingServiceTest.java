@@ -45,7 +45,7 @@ class TestingServiceTest {
         String userLastname = testingService.readUserName();
         assertEquals(example, userLastname );
     }
-
+/*
     @Test
     void readUserLastName() throws IOException {
         String example = "Britva";
@@ -53,7 +53,7 @@ class TestingServiceTest {
         String userLastname = testingService.readUserLastName();
         assertEquals(example, userLastname );
     }
-
+*/
 
     @Test
     void getNextQuestion() {

@@ -6,13 +6,15 @@ public interface TestingService {
 
     String readUserName ();
 
-    String readUserLastName ();
-
     Question getNextQuestion();
 
     void printQuestion(Question question);
 
     int readTestAnswer ();
 
-    void startTest();
+    int startTest();
+
+    void printResult();
+
+    int getResult();
 }

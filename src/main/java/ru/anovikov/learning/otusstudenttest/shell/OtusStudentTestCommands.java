@@ -12,9 +12,19 @@ public class OtusStudentTestCommands {
     @Autowired
     private TestingService testingService;
 
-    @ShellMethod(value = "Start testing", key = {"start-test", "start"})
-    public void printPartyMembers() {
-        testingService.startTest();
+    @ShellMethod(value = "Enter name", key = {"greetings", "hello"})
+    public void greetings() {
+        testingService.readUserName();
     }
 
+    @ShellMethod(value = "Start testing", key = {"start-test", "start"})
+    public void startTest() {
+        testingService.startTest();
+        testingService.printResult();
+    }
+
+    @ShellMethod(value = "Print result", key = {"result", "res"})
+    public void printResult() {
+        testingService.printResult();
+    }
 }
