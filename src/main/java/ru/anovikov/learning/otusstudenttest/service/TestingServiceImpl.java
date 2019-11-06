@@ -138,8 +138,4 @@ public class TestingServiceImpl implements TestingService {
             System.out.println(String.format(messageSource.getMessage("write.good.result", new String[]{""}, locale), name + " " + lastname, lastResult, testingQuestions.size()));
         }
     }
-
-    public int getResult() {
-        return lastResult;
-    }
 }
